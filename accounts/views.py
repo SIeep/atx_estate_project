@@ -40,13 +40,32 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        # Login User
-        pass
+        username = request.POST['username']
+        password = request.POST['password']
+
+        print("Grabbed user and pass")
+
+        user = auth.authenticate(username=username, password=password)
+
+        print("User is {}".format(user))
+
+        if user is not None:
+            print("Made it to if")
+            auth.login(request, user)
+            messages.success(request, 'You are now logged in.')
+            print("Redirecting...")
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Invalid credentials')
+            return redirect('login')
     else:
         return render(request, 'accounts/login.html')
 
 def logout(request):
-    return render(request, 'index')
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, 'You are now logged out.')
+        return redirect('index')
 
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
