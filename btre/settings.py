@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-from secret_settings import SUPER_SECRET_KEY, POSTGRES_PASS, POSTGRES_USER, POSTGRES_DB
+from secret_settings import SUPER_SECRET_KEY, POSTGRES_PASS, POSTGRES_USER, POSTGRES_DB, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -142,3 +142,10 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+# Email config
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_USE_TLS = True
